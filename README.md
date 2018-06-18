@@ -1,7 +1,8 @@
 # twatter
 
 Launch the bot with
-``` node index.js
+```
+node index.js
 ```
 Setup a file called `config.js` according to `config-sample.js` to make sure that it is able to tweet.
 

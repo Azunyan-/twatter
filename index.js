@@ -82,8 +82,8 @@ request('https://sl.se/sv/find/', function (error, response, html) {
                         console.log("Tweet success!");
                     }
                 }
-                
-                console.log("Tweet would have been sent", title, "\n");
+
+                console.log("Tweet have been sent", title, "\n");
             } else {
                 console.log('Automatic tweet was to long: ', tweetLength);
             }

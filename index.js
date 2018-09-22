@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const Twit = require('twit');
 
-var config = require('./config');
+var config = require('./config.js');
 var T = new Twit(config);
 /*
 const options = {

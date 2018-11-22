@@ -3,7 +3,11 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const Twit = require('twit');
 
+<<<<<<< HEAD
 var config = require('/home/twatter/twatter/config.js');
+=======
+var config = require('./config.js');
+>>>>>>> 067792d0e777f17c71600ee61b7d2e8e461302f0
 var T = new Twit(config);
 
 function getDateTime() {

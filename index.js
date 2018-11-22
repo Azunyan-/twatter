@@ -3,8 +3,34 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const Twit = require('twit');
 
-var config = require('./config');
+var config = require('/home/twatter/twatter/config.js');
 var T = new Twit(config);
+
+function getDateTime() {
+
+    var date = new Date();
+
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+
+    var min  = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+
+    var sec  = date.getSeconds();
+    sec = (sec < 10 ? "0" : "") + sec;
+
+    var year = date.getFullYear();
+
+    var month = date.getMonth() + 1;
+    month = (month < 10 ? "0" : "") + month;
+
+    var day  = date.getDate();
+    day = (day < 10 ? "0" : "") + day;
+
+    return year + ":" + month + ":" + day + ":" + hour + ":" + min + ":" + sec;
+
+}
+
 /*
 const options = {
     uri: 'https://sl.se/sv/find/',
@@ -21,7 +47,7 @@ rp(options)
         console.log(err);
     });
 */
-var titleArray = fs.readFileSync('lastPostTitle.txt').toString().split("\n");
+var titleArray = fs.readFileSync('/home/twatter/twatter/lastPostTitle.txt').toString().split("\n");
 for(i in titleArray) {
     console.log("Line ", i, " ", titleArray[i]);
 }
@@ -54,14 +80,14 @@ request('https://sl.se/sv/find/', function (error, response, html) {
             link = link.trim();
 
             //Title appending if it didnt exist in the actual thing
-            fs.appendFileSync('lastPostTitle.txt', title + "\n" );
+            fs.appendFileSync('/home/twatter/twatter/lastPostTitle.txt', title + "\n" );
             //Tweety bit
-            var tweetcontent = title + " " + shorttext + " " + link;
+            var tweetcontent = title + " " + shorttext + " " + link + " #SL";
             var tweetLength = tweetcontent.length;
             if(tweetLength <= 280){
                 console.log('Automatic composed tweet length under 280 \n');
             } else {
-                var tweetcontent = title + " " + link;
+                var tweetcontent = title + " " + link + " #SL";
                 tweetLength = tweetcontent.length;
             }
             var tweet = {
@@ -77,7 +103,7 @@ request('https://sl.se/sv/find/', function (error, response, html) {
 
                 function tweeted(err, data, response) {
                     if(err) {
-                        console.log("Something went wrong whilst tweeting!");
+                        console.log("Something went wrong whilst tweeting!  ",err);
                     } else {
                         console.log("Tweet success!");
                     }
@@ -106,3 +132,5 @@ request('https://news.ycombinator.com', function (error, response, html) {
   }
 });
 */
+var runTime = getDateTime();
+fs.appendFileSync('/home/twatter/twatter/runLog.txt', runTime + '\n');

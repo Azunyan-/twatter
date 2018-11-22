@@ -60,5 +60,8 @@ typings/
 # next.js build output
 .next
 
+#Custom stuff
 # config.js
 config.js
+#Log of executions
+#runLog.txt
